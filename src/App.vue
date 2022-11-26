@@ -26,15 +26,24 @@ export default {
       autocomplete({
         container: "#autocomplete",
         placeholder: "ex: 21009, Bekkouche Lakhder, skikda",
-        getSources({ query }) {
+        getSources({ query, setQuery, refresh }) {
           return [
             {
               onSelect({ item }) {
+                document.querySelector(
+                  ".aa-DetachedSearchButtonPlaceholder"
+                ).innerText = `${item.code}, ${item.title}, ${item.region}`;
                 this.inputValue = `${item.code}, ${item.title}, ${item.region}`;
+                document.querySelector(
+                  ".aa-Input"
+                ).value = `${item.code}, ${item.title}, ${item.region}`;
+                setQuery(`${item.code}, ${item.title}, ${item.region}`);
               },
               sourceId: "products",
-              getItemInputValue: ({ item }) =>
-                `${item.code}, ${item.title}, ${item.region}`,
+              getItemInputValue: ({ item }) => {
+                console.log(item);
+                return `${item.code}, ${item.title}, ${item.region}`;
+              },
               getItems() {
                 return new Promise((resolve) => setTimeout(resolve, 1000)).then(
                   () => {
@@ -51,7 +60,6 @@ export default {
               templates: {
                 item({ item, components }) {
                   // console.log(item);
-
                   return (
                     <li>
                       {item.code}, {item.title}, {item.region}
