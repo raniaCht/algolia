@@ -48,7 +48,7 @@ export default {
     function onAddToCart(event) {
       event.preventDefault();
       event.stopPropagation();
-
+      
       console.log("Add to cart");
     }
 
