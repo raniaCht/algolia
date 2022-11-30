@@ -26,7 +26,7 @@ export default {
       autocomplete({
         container: "#autocomplete",
         placeholder: "ex: 21009, Bekkouche Lakhder, skikda",
-        getSources({ query, setQuery, refresh }) {
+        getSources({ query, setQuery }) {
           return [
             {
               onSelect({ item }) {
@@ -59,12 +59,10 @@ export default {
               },
               templates: {
                 item({ item, components }) {
-                  // console.log(item);
                   return (
                     <li>
                       {item.code}, {item.title}, {item.region}
                     </li>
-                    // <ProductItem item={item} highlight={components.Highlight} />
                   );
                 },
               },
